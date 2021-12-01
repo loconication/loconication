@@ -2,7 +2,7 @@ const Sequelize = require("sequelize")
 const Op = Sequelize.Op;
 
 const models = require("../models");
-const usr = models.Usuario;
+const usr = models.Hojapuestas;
 
 const actualiza = async(cod, mont, gan, gana) => {
     console.log("==> INicio de update")

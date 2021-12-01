@@ -29,4 +29,26 @@ const hojapuestas = models.HojaApuestas;
 const juego = models.Juego;
 const partida = models.partida;
 
+rutas.route("/agregar")
+    .post( async(req,res,next) =>{
+        /*
+        console.log(req.body.codigo)
+        console.log(req.body.nombre)
+        console.log(req.body.edad)
+        */
+       await inserta(
+                req.body.codigo,
+                req.body.nombre,
+                req.body.edad
+            )
+            .then( async () =>{
+                    res.sendStatus(201)
+            })
+            .catch( (error) => {
+                console.log("Ocurrio un error en el insert", error)
+            })
+
+    })
+
+
 const rutas = express.Router();

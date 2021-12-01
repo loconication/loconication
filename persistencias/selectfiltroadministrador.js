@@ -5,7 +5,7 @@ const Sequelize = require("sequelize")
 const Op = Sequelize.Op;
 
 const models = require("../models");
-const usr = models.Afministrador;
+const usr = models.Administrador;
 
 const query1 = async(llave) => {
     console.log("==> Inicio de query1");

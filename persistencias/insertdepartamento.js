@@ -5,7 +5,7 @@ const inserta = async(cod, nom, eda) => {
     console.log("==> Inicio de insert")
 
     return usr.create({
-            codigo: cod,
+            id: cod,
             nombre: nom,
         })
         .then((newUsr) => {

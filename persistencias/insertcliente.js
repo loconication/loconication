@@ -1,5 +1,5 @@
 const models = require("../models");
-const usr = models.Usuario;
+const usr = models.Cliente;
 
 const inserta = async(cod, nom, eda) => {
     console.log("==> Inicio de insert")

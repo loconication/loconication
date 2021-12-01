@@ -1,3 +1,6 @@
+
+
+
 //Todas las dependencias incluidas
 const express = require('express')
 const app = express()
@@ -5,6 +8,8 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+
+
 
 //Carga nuestra env if si esta en development 
 if (process.env.NODE_ENV !== 'production') {
@@ -93,7 +98,7 @@ function forwardAuthenticated(req, res, next) {
 }
 
 
-/*
+
 app.get('/', async(req,res)=>{
     const banners = await db.Banner.findAll({
         where: {
@@ -1012,7 +1017,7 @@ app.post('/registro1', async(req, res) => {
     var pepsU = req.body.PEPu;
 
 
-    await db.Usuario.create({
+    await db.Cliente.create({
         rol: 'user',
         nombre: nombreU,
         apellido: apellidoU,
@@ -1029,6 +1034,10 @@ app.post('/registro1', async(req, res) => {
 
     res.redirect('/paginaespera')
 })
+
+const registD=require("./persistencias/insertdepartamento")
+
+app.use("/resgistro2",registD)
 
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
@@ -1108,10 +1117,9 @@ app.get('/hojaDeApuestas/eliminar/:id', async(req, res) => {
 })
 
 
-app.listen(PORT, () => {
+/*app.listen(PORT, () => {
     console.log(`El servidor se inicio en el puerto: ${PORT}`)
-})
+})*/
 
-*/
 app.listen(3000)
 console.log("Server running on port 3000...")
