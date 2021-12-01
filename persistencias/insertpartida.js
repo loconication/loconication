@@ -9,10 +9,10 @@ const inserta = async(cod, nom, eda) => {
             fecha: fec,
             hora: hora,
             duracion: dur,
-            equipo1: equ1,
-            equipo2: equ2,
-            factor1: fac1,
-            factor2: fac2,
+            equipoA: equA,
+            equipoB: equB,
+            factorA: facA,
+            factorB: facB,
             selector: selec,
 
         })
