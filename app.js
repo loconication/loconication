@@ -225,7 +225,7 @@ app.post('/administrarBanners/editar', async(req,res)=>{
 
 app.get('/administrarPartidas', async (req,res)=>{
     const juego = await db.Juego.findAll()
-    const categoria = await db.Categoria.findAll()
+    const categoria = await db.Categoriajuego.findAll()
 
     const partidas = await db.Partida.findAll({
         order:[
@@ -244,8 +244,8 @@ app.get('/administrarPartidas', async (req,res)=>{
             hora: partida.hora,
             duracion: partida.duracion,
             estado: partida.estado,
-            equipoA: partida.equipoA,
-            equipoB: partida.equipoB,
+            equipo1: partida.equipoA,
+            equipo2: partida.equipoB,
             factorA: partida.factorA,
             factorB: partida.factorB,
             factorEmpate: partida.factorEmpate,
@@ -368,7 +368,7 @@ app.get('/administrarPartidas/filtrar/:filtro', async (req, res) => {
         {
             const juego = await db.Juego.findAll()
 
-            const categorias = await db.Categoria.findAll()
+            const categorias = await db.Categoriajuego.findAll()
             
             const partidas = await db.Partida.findAll({
                 order:[
@@ -424,7 +424,7 @@ app.get('/administrarPartidas/filtrarCategoria/:categoriaId', async (req, res) =
         const categoriaId = req.params.categoriaId
         const juego = await db.Juego.findAll()
 
-            const categorias = await db.Categoria.findAll()
+            const categorias = await db.Categoriajuego.findAll()
 
             
             const partidas = await db.Partida.findAll({
@@ -478,7 +478,7 @@ app.get('/partidas', async(req,res)=>{
 
     const partidas = await db.Partida.findAll();
     const juegos = await db.Juego.findAll();
-    const categorias= await db.Categoria.findAll();
+    const categorias= await db.Categoriajuego.findAll();
     
     res.render('partidas', {
         partidas : partidas,
@@ -524,7 +524,7 @@ app.get('/partidas', async(req,res)=>{
                     })
     }
 
-    const categorias= await db.Categoria.findAll();
+    const categorias= await db.Categoriajuego.findAll();
     
     res.render('partidas', {
         partidas : listaPartidas,
@@ -547,7 +547,7 @@ app.get('/partidas/filtro/:id', async(req,res)=>{
         ]
     });
 
-    const categorias=await db.Categoria.findAll()
+    const categorias=await db.Categoriajuego.findAll()
 
     const partidas=await db.Partida.findAll({
         where: {
@@ -599,7 +599,7 @@ app.get('/partidas/fechasproximas', async(req,res) => {
     }
     console.log(fechasproximas);
 
-    const categorias = await db.Categoria.findAll();
+    const categorias = await db.Categoriajuego.findAll();
     const juegos = await db.Juego.findAll();
     const banners = await db.Banner.findAll({
         order :[
@@ -634,7 +634,7 @@ app.get('/partidas/fechasantiguas', async(req,res) => {
     })
     console.log(fechasproximas);
 
-    const categorias = await db.Categoria.findAll();
+    const categorias = await db.Categoriajuego.findAll();
     const juegos = await db.Juego.findAll();
     const banners = await db.Banner.findAll({
         order :[
@@ -658,7 +658,7 @@ app.get('/partidas/fechasantiguas', async(req,res) => {
 app.get('/administrarCategorias', async (req, res) => {
 
     if(req.session.rol=="admin"){
-        const categorias = await db.Categoria.findAll({
+        const categorias = await db.Categoriajuego.findAll({
             order :[
                 ['id', 'ASC']
             ]
@@ -691,7 +691,7 @@ app.get('/administrarCategorias/nuevo', (req, res) => {
 app.post('/administrarCategorias/nuevo', async (req, res) => {
     const categoriaNombre = req.body.categoria_nombre
 
-    await db.Categoria.create({
+    await db.Categoriajuego.create({
         nombre: categoriaNombre
     })
 
@@ -705,7 +705,7 @@ app.get('/administrarCategorias/modificar/:id', async (req, res) => {
     {
         const idCategoria = req.params.id
 
-        const categoria = await db.Categoria.findOne({
+        const categoria = await db.Categoriajuego.findOne({
             where : {
                 id : idCategoria
             }
@@ -726,7 +726,7 @@ app.post('/administrarCategorias/modificar', async (req, res) => {
     const idCategoria = req.body.categoria_id
     const nombreCategoria = req.body.categoria_nombre
 
-    const categoria = await db.Categoria.findOne({
+    const categoria = await db.Categoriajuego.findOne({
         where :{
             id: idCategoria
         }
@@ -743,7 +743,7 @@ app.post('/administrarCategorias/modificar', async (req, res) => {
 app.get('/administrarCategorias/eliminar/:id', async (req, res) => {
     const categoriaId = req.params.id
 
-    await db.Categoria.destroy({
+    await db.Categoriajuego.destroy({
         where : {
             id : categoriaId
         }
@@ -762,7 +762,7 @@ app.get('/AdministrarJuegos', async(req, res) => {
             ['id', 'ASC']
         ]
     });
-    const categorias = await db.Categoria.findAll();
+    const categorias = await db.Categoriajuego.findAll();
     
     if(req.session.rol=="admin"){
     res.render('administrarJuegos', {
@@ -802,7 +802,7 @@ app.post('/AdministrarJuegos/editar', async (req,res)=>{
         jcategoria = juego.categoria;
     }
     
-    const categoria = await db.Categoria.findOne({
+    const categoria = await db.Categoriajuego.findOne({
         where : {
             nombre : jcategoria
         }
@@ -835,7 +835,7 @@ app.get('/administrarJuegos/eliminar/:codigo',async(req,res)=>{
 
 //Mantenimiento de clientes
 app.get('/AdministrarClientes', async (req,res)=>{
-    const clientes = await db.Usuario.findAll({
+    const clientes = await db.Cliente.findAll({
         order :[
             ['id', 'ASC']
         ]
@@ -855,7 +855,7 @@ app.post('/AdministrarClientes/editar',async(req,res)=>{
     const idCliente = req.body.cliente_id
     console.log("id: "+ idCliente)
 
-    const cliente = await db.Usuario.findOne({
+    const cliente = await db.Cliente.findOne({
         where:{
             id : idCliente
         }
@@ -885,7 +885,7 @@ app.post('/AdministrarClientes/editar',async(req,res)=>{
 app.get('/AdministrarClientes/filtrar', async(req, res) => {
     const filtroA = req.query.filtro;
     console.log(filtroA);
-    const clientes = await db.Usuario.findAll();
+    const clientes = await db.Cliente.findAll();
 
     const clientesFiltrados = [];
 
@@ -917,7 +917,7 @@ app.get('/AdministrarClientes/filtrar', async(req, res) => {
 app.get('/hojaDeApuestas', async(req, res) => {
 
     if (req.session.rol == 'user') {
-        const apuestas = await db.Apuesta.findAll({
+        const apuestas = await db.hojapuesta.findAll({
             order: [
                 ['id', 'ASC']
             ]
@@ -959,7 +959,7 @@ app.post('/login', async(req, res) => {
     const passwordA = req.body.passwordU
     usuarioA = null
 
-    const Usuarios = await db.Usuario.findAll()
+    const Usuarios = await db.Cliente.findAll()
 
     Usuarios.forEach((usuario) => {
         if (usuario.correo == correoA) {
@@ -989,14 +989,14 @@ app.post('/login', async(req, res) => {
 })
 
 app.get('/paginaespera', async(req, res) => {
-    const Usuarios = await db.Usuario.findAll()
+    const Usuarios = await db.Cliente.findAll()
     res.render('paginaespera', {
         Usuarios: Usuarios
     })
 })
 
 app.get('/registro1', async(req, res) => {
-    const Usuarios = await db.Usuario.findAll()
+    const Usuarios = await db.Cliente.findAll()
     res.render('registro1', {
         Usuarios: Usuarios
     })
@@ -1053,7 +1053,7 @@ app.post('/hojaDeApuesta', async(req, res) => {
 
 
 
-    const apuesta = await db.Apuesta.findOne({
+    const apuesta = await db.hojApuesta.findOne({
         where: {
             id: apuestaId
         }
@@ -1075,7 +1075,7 @@ app.get('/historialDeApuestas', async(req, res) => {
 
 
     if (req.session.rol == 'user') {
-        const apuestas = await db.Apuesta.findAll({
+        const apuestas = await db.hojapuesta.findAll({
             order: [
                 ['id', 'ASC']
             ]
@@ -1105,7 +1105,7 @@ app.get('/historialDeApuestas', async(req, res) => {
 app.get('/hojaDeApuestas/eliminar/:id', async(req, res) => {
     const apuestaId = req.params.id
 
-    await db.Apuesta.destroy({
+    await db.hojApuesta.destroy({
         where: {
             id: apuestaId
         }

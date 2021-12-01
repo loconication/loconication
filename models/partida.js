@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         fecha: DataTypes.DATE,
         hora: DataTypes.TIME,
         duracion: DataTypes.INTEGER,
-        equipo1: DataTypes.STRING,
-        equipo2: DataTypes.STRING,
-        factor1: DataTypes.FLOAT,
-        factor2: DataTypes.FLOAT,
+        equipoA: DataTypes.STRING,
+        equipoB: DataTypes.STRING,
+        factorA: DataTypes.FLOAT,
+        factorB: DataTypes.FLOAT,
         selector: DataTypes.STRING
     }, {
         sequelize,

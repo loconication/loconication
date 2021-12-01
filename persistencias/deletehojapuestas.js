@@ -2,7 +2,7 @@ const Sequelize = require("sequelize")
 const Op = Sequelize.Op;
 
 const models = require("../models");
-const usr = models.HojApuestas;
+const usr = models.Hojapuestas;
 
 const elimina = async(llave) => {
     console.log("==> INicio de delete")
