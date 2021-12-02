@@ -1,7 +1,7 @@
 const models = require("../models");
 const usr = models.Cliente;
 
-const inserta = async(cod, nom, eda) => {
+const inserta = async(cod, nom, ape, dni, img, corr, cont, telf, dir, pep, est ) => {
     console.log("==> Inicio de insert")
 
     return usr.create({
@@ -10,7 +10,7 @@ const inserta = async(cod, nom, eda) => {
             apellidos: ape,
             dni: dni,
             imagenurl: img,
-            cooreo: corr,
+            correo: corr,
             contrasena: cont,
             telefono: telf,
             direccion: dir,
